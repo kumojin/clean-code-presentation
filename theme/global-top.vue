@@ -1,0 +1,23 @@
+<!-- global-top.vue -->
+
+<template>
+  <footer
+    v-if="$slidev.themeConfigs.eventLogo && $slidev.nav.currentLayout !== 'intro'"
+    class="absolute bottom-0 p-4 mt-auto flex justify-end items-center w-full text-primary dark:text-white z-10"
+  >
+    <div class="mb-0 flex items-center">
+      <a :href="$slidev.themeConfigs.eventUrl" target="_blank"
+        ><img
+          :src="$slidev.themeConfigs.eventLogo"
+          class="h-12 mr-4"
+          alt="Event image"
+      /></a>
+    </div>
+    <a
+      v-if="$slidev.themeConfigs.twitter"
+      :href="$slidev.themeConfigs.twitterUrl"
+      target="_blank"
+      ><logos-twitter />{{ $slidev.themeConfigs.twitter }}</a
+    >
+  </footer>
+</template>
