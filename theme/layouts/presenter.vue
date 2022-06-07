@@ -7,7 +7,7 @@
     <div class="flex items-center">
       <figure class="w-1/3">
         <img
-          :src="$attrs.firstPresenterImage"
+          :src="props.firstPresenterImage"
           class="relative rounded-full object-cover h-40 w-40 border border-8 rounded-border z-10"
         />
       </figure>
@@ -18,7 +18,7 @@
     <div class="flex items-center">
       <figure class="w-1/3">
         <img
-          :src="$attrs.secondPresenterImage"
+          :src="props.secondPresenterImage"
           class="relative rounded-full object-cover h-40 w-40 border border-8 rounded-border z-10"
         />
       </figure>
@@ -28,3 +28,16 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+
+const props = defineProps({
+  firstPresenterImage: {
+    type: String,
+  },
+  secondPresenterImage: {
+    type: String,
+  },
+})
+</script>

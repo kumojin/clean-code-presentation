@@ -9,13 +9,26 @@
       </div>
       <figure class="relative flex flex-col justify-center">
         <img
-          :src="$attrs.media"
+          :src="props.media"
           class="rounded-lg shadow-lg object-cover z-10"
         />
         <figcaption class="mt-2 text-xs w-full">
-          {{ $attrs.caption }}
+          {{ props.caption }}
         </figcaption>
       </figure>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+
+const props = defineProps({
+  media: {
+    type: String,
+  },
+  caption: {
+    type: String,
+  },
+})
+</script>
