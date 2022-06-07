@@ -7,7 +7,7 @@
     <div class="flex items-center">
       <figure class="w-1/3">
         <img
-          :src="props.firstPresenterImage"
+          :src="firstImageUrl"
           class="relative rounded-full object-cover h-40 w-40 border border-8 rounded-border z-10"
         />
       </figure>
@@ -18,7 +18,7 @@
     <div class="flex items-center">
       <figure class="w-1/3">
         <img
-          :src="props.secondPresenterImage"
+          :src="secondImageUrl"
           class="relative rounded-full object-cover h-40 w-40 border border-8 rounded-border z-10"
         />
       </figure>
@@ -31,6 +31,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { resolveAssetUrl } from '../layoutHelper'
 
 const props = defineProps({
   firstPresenterImage: {
@@ -40,4 +41,7 @@ const props = defineProps({
     type: String,
   },
 })
+
+const firstImageUrl = computed(() => resolveAssetUrl(props.firstPresenterImage))
+const secondImageUrl = computed(() => resolveAssetUrl(props.secondPresenterImage))
 </script>
