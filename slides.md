@@ -2,9 +2,9 @@
 theme: ./theme
 colorSchema: 'auto'
 layout: intro
-image: './theme/public/kumojin-photo.png'
+image: '/kumojin-photo.png'
 themeConfig:
-  eventLogo: './theme/public/logo-vertical.png'
+  eventLogo: '/logo-vertical.png'
   eventUrl: 'https://kumojin.com'
 ---
 
@@ -25,8 +25,8 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 ---
 layout: presenter
-firstPresenterImage: ./theme/public/lukasz_avatar.jpg
-secondPresenterImage: ./theme/public/avatar.jpg
+firstPresenterImage: /lukasz_avatar.jpg
+secondPresenterImage: /avatar.jpg
 ---
 ::title::
 # Who are we?
@@ -40,7 +40,7 @@ Fullstack Developer at Kumojin & Le Wagon Montréal alumnus
 
 ---
 layout: new-section
-image: ./theme/public/intro_invader.jpg
+image: /intro_invader.jpg
 ---
 
 # SOLID
@@ -55,7 +55,7 @@ The First 5 Principles of Object Oriented Design Explained
 
 ---
 layout: text-image
-media: ./theme/public/single_responsibility_principle.jpg
+media: /single_responsibility_principle.jpg
 ---
 
 # Single Responsibility Principle (SRP)
@@ -109,7 +109,7 @@ Single reason for `Invader` to change: logic that calculates the health
 
 ---
 layout: text-image
-media: ./theme/public/openclosed_principle.jpg
+media: /openclosed_principle.jpg
 ---
 
 # Open/Closed Principle (OCP)
@@ -257,7 +257,7 @@ Here, InvaderAttack takes a mover and renderer, but it doesn't know about their 
 
 ---
 layout: text-image
-media: ./theme/public/liskov_substitution_principle.jpg
+media: /liskov_substitution_principle.jpg
 ---
 
 # Liskov Substitution Principle (LSP)
@@ -498,7 +498,7 @@ end
 
 ---
 layout: text-image
-media: ./theme/public/interface_segregation_principle.jpg
+media: /interface_segregation_principle.jpg
 ---
 
 # Interface Segregation Principle (ISP)
@@ -575,7 +575,7 @@ end
 
 ---
 layout: text-image
-media: ./theme/public/dependency_inversion_principle.jpg
+media: /dependency_inversion_principle.jpg
 ---
 
 # Dependency Inversion Principle (DIP)
