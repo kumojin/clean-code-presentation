@@ -25,8 +25,8 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 ---
 layout: presenter
-firstPresenterImage: /lukasz_avatar.jpg
-secondPresenterImage: /avatar.jpg
+firstPresenterImage: ./lukasz_avatar.jpg
+secondPresenterImage: ./avatar.jpg
 ---
 ::title::
 # Who are we?
