@@ -9,7 +9,7 @@
       </div>
       <figure class="relative flex flex-col justify-center">
         <img
-          :src="props.media"
+          :src="mediaUrl"
           class="rounded-lg shadow-lg object-cover z-10"
         />
         <figcaption class="mt-2 text-xs w-full">
@@ -22,6 +22,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { resolveAssetUrl } from '../layoutHelper'
 
 const props = defineProps({
   media: {
@@ -31,4 +32,7 @@ const props = defineProps({
     type: String,
   },
 })
+
+const mediaUrl = computed(() => resolveAssetUrl(props.media))
+
 </script>

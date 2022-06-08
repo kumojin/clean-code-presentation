@@ -8,7 +8,7 @@
     <div class="mb-0 flex items-center">
       <a :href="$slidev.themeConfigs.eventUrl" target="_blank"
         ><img
-          :src="$slidev.themeConfigs.eventLogo"
+          :src="resolveAssetUrl($slidev.themeConfigs.eventLogo)"
           class="h-12 mr-4"
           alt="Event image"
       /></a>
@@ -21,3 +21,8 @@
     >
   </footer>
 </template>
+
+<script setup lang="ts">
+import { resolveAssetUrl } from './layoutHelper'
+</script>
+

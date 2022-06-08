@@ -1,6 +1,6 @@
 ---
 theme: ./theme
-colorSchema: 'auto'
+colorSchema: 'light'
 layout: intro
 image: '/kumojin-photo.png'
 themeConfig:
