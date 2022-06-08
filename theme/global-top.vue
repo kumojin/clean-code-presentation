@@ -9,7 +9,7 @@
       <a :href="$slidev.themeConfigs.eventUrl" target="_blank"
         ><img
           :src="resolveAssetUrl($slidev.themeConfigs.eventLogo)"
-          class="h-12 mr-4"
+          class="h-8 mr-4"
           alt="Event image"
       /></a>
     </div>

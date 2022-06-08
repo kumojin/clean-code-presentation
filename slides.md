@@ -32,19 +32,56 @@ secondPresenterImage: ./avatar.jpg
 # Who are we?
 ::first::
 ### Lukasz Kokot
-Chief Technological Officer & Senior Cloud Developer at Kumojin
+Co-Founder, Chief Technological Officer & Senior Cloud Developer at Kumojin
 
 ::second::
 ### Anne-Marie Nault
-Fullstack Developer at Kumojin & Le Wagon Montréal alumnus
+Full Stack Developer at Kumojin & Le Wagon Montréal alumna
+
+---
+layout: text-image
+media: /clean_code.jpg
+---
+
+# What is Clean Code?
+> Even bad code can function. But if code isn’t clean, it can bring a development organization to its knees
+
+- Philosophy best summed up in this handbook by **Robert C. Martin, aka "Uncle Bob"**
+- Principles, patterns, and practices of writing readable, scalable and testable code
+- **DRY, KISS, YAGNI, Law of Demeter** and **SOLID** are some of these principles
 
 ---
 layout: new-section
-image: /intro_invader.jpg
+---
+
+# DRY
+Don't repeat yourself
+
+---
+layout: new-section
+---
+
+# KISS
+Keep it simple stupid
+
+---
+layout: new-section
+---
+
+# YAGNI
+You ain't gonna need it
+
+---
+layout: new-section
+---
+# Law of Demeter
+
+---
+layout: new-section
 ---
 
 # SOLID
-The First 5 Principles of Object Oriented Design Explained
+The First 5 Principles of Object Oriented Design
 
 
 <!--
@@ -624,6 +661,17 @@ InvaderAttack.new(
 <!--
 Coming back to the example we talked about in the Open Closed principle, we see here how we instantiate the mover and renderer outside the InvaderAttack class
 -->
+
+---
+layout: new-section
+---
+
+# Craftsmanship
+There are two parts to learning craftsmanship: **knowledge** and **work**.
+
+*You must gain the knowledge of principles, patterns, practices, and heuristics that a craftsman knows, and you must also grind that knowledge into your fingers, eyes, and gut by working hard and practicing.*
+
+-- Robert C. Martin
 
 ---
 layout: default
