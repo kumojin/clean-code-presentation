@@ -48,33 +48,7 @@ media: /clean_code.jpg
 
 - Philosophy best summed up in this handbook by **Robert C. Martin, aka "Uncle Bob"**
 - Principles, patterns, and practices of writing readable, scalable and testable code
-- **DRY, KISS, YAGNI, Law of Demeter** and **SOLID** are some of these principles
-
----
-layout: new-section
----
-
-# DRY
-Don't repeat yourself
-
----
-layout: new-section
----
-
-# KISS
-Keep it simple stupid
-
----
-layout: new-section
----
-
-# YAGNI
-You ain't gonna need it
-
----
-layout: new-section
----
-# Law of Demeter
+- **SOLID, DRY, KISS, YAGNI,** and **Law of Demeter** are some of these principles
 
 ---
 layout: new-section
@@ -661,6 +635,186 @@ InvaderAttack.new(
 <!--
 Coming back to the example we talked about in the Open Closed principle, we see here how we instantiate the mover and renderer outside the InvaderAttack class
 -->
+
+---
+layout: new-section
+---
+
+# DRY
+Don't repeat yourself
+
+---
+layout: text-window
+---
+
+# Don't Repeat Yourself
+>Every piece of knowledge must have a single, unambiguous, authoritative representation within a system
+
+- Repeated code is harder to maintain and scale
+- Very likely to encounter errors if a change in logic is needed
+- You should extract common logic into their own methods/functions
+
+::window::
+```ruby
+# REPEATED CODE
+class InvaderAttack
+ ...
+
+  def main_loop
+    invaders.each do |invader|
+      mover.move(invader)
+      renderer.render(invader)
+    end
+  end
+
+  def special_loop
+    invaders.each do |invader|
+      invader.health(10)
+      mover.move(invader)
+      renderer.render(invader)
+    end
+  end
+end
+```
+
+---
+layout: text-window
+---
+
+# Don't Repeat Yourself
+>Every piece of knowledge must have a single, unambiguous, authoritative representation within a system
+
+- Repeated code is harder to maintain and scale
+- Very likely to encounter errors if a change in logic is needed
+- You should extract common logic into their own methods/functions
+
+::window::
+```ruby
+# REFACTORED
+class InvaderAttack
+ ...
+
+  def main_loop
+    invaders.each do |invader|
+      basic_attack(invader)
+    end
+  end
+
+  def special_loop
+    invaders.each do |invader|
+      invader.health(10)
+      basic_attack(invader)
+    end
+  end
+
+  private
+
+  def basic_attack(invader)
+    mover.move(invader)
+    renderer.render(invader)
+  end
+end
+```
+
+---
+layout: new-section
+---
+
+# KISS
+Keep it simple stupid
+
+---
+layout: text-image
+media: /kiss.png
+---
+
+# Keep it simple
+>Any fool can write code that a computer can understand. Good programmers write code that humans can understand
+
+- Code should be easy to understand and easy to maintain
+- Divide your lengthy methods into short, simple pieces of logic
+- Your code shouldn't need comments to explain what it does!
+- Linters (like Rubocop for Ruby) will often warn you based on some metrics
+
+---
+layout: new-section
+---
+
+# YAGNI
+You ain't gonna need it
+
+---
+layout: text-image
+media: /yagni.png
+---
+
+# YAGNI
+
+- Implement features only when you do need it
+- Avoid having to maintain code that is not being used, and might never be
+- Also in line with the Agile Methodology
+
+Do expect your code to change in the future and make sure it will be **easy to change**, but you can't predict what **exact changes** will be needed.
+
+---
+layout: new-section
+---
+# Law of Demeter
+
+---
+layout: text-window
+---
+
+# Law of Demeter
+### Principle of least knowledge
+
+- Keep software entities independent of each other
+- Reduce the communication or coupling between different classes - "don't talk to strangers"
+- Put related classes in the same package, module or directory to achieve cohesion
+
+::window::
+```ruby
+class Game < ActiveRecord::Base
+  belongs_to :user
+end
+
+class User < ActiveRecord::Base
+  has_many :games
+end
+
+invader_game.user.username
+
+# ⚠️WARNING⚠️ 
+# INSTANCE OF GAME IS CALLING USERNAME VIA USER
+```
+
+---
+layout: text-window
+---
+
+# Law of Demeter
+### Principle of least knowledge
+
+- Keep software entities independent of each other
+- Reduce the communication or coupling between different classes - "don't talk to strangers"
+- Put related classes in the same package, module or directory to achieve cohesion
+
+::window::
+```ruby
+class Game < ActiveRecord::Base
+  belongs_to :user
+  delegate :username, to: :user, prefix: true
+end
+
+class User < ActiveRecord::Base
+  has_many :games
+end
+
+invader_game.user_username
+
+# 'DELEGATE' IN RAILS MAKES IT POSSIBLE
+# TO CALL USERNAME DIRECTLY ON INSTANCE OF GAME
+```
 
 ---
 layout: new-section
