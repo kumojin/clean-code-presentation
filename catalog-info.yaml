@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: clean-code-presentation
+  annotations:
+    github.com/project-slug: kumojin/clean-code-presentation
+  tags:
+    - html
+    - markdown
+    - javascript
+    - slidev
+spec:
+  type: website
+  lifecycle: unknown
+  owner: guests
