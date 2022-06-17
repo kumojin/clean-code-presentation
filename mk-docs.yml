@@ -1,0 +1,7 @@
+site_name: 'clean-code-presentation'
+
+nav:
+  - Home: README.md
+
+plugins:
+  - techdocs-core
