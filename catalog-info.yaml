@@ -3,6 +3,7 @@ kind: Component
 metadata:
   name: clean-code-presentation
   annotations:
+    backstage.io/techdocs-ref: dir:.
     github.com/project-slug: kumojin/clean-code-presentation
   tags:
     - html
