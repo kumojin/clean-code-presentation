@@ -526,7 +526,7 @@ layout: text-window
 
 ::window::
 ```ruby
-class Invader
+class InvaderAttack
   def bomb(target, swoop)
     target.destroy
     puts "*swoop swoop*" if swoop
@@ -535,13 +535,13 @@ end
 
 class Bomber
   def attack(target)
-    Invader.new.bomb(target, false)
+    InvaderAttack.new.bomb(target, false)
   end
 end
 
 class Swooper
-  def attack(target)
-    Invader.new.bomb(target, true)
+  def attack
+    InvaderAttack.new.bomb(target, true)
   end
 end
 ```
@@ -571,8 +571,8 @@ end
 
 class Swooper
   def attack(target)
-    invader.bomb(target)
-    invader.swoop
+    invader_attack.bomb(target)
+    invader_attack.swoop
   end
 
   private
