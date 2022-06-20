@@ -21,6 +21,12 @@ themeConfig:
 
 <!--
 Congrats, you have completed Le Wagon's coding bootcamp! But then... what's next?
+
+Is it just about learning more languages and framework? No!
+
+Especially if you join an existing company as a dev, you're about to work with more people, on much bigger projects, which brings different challenges.
+
+This presentation is about a philosophy we follow at Kumojin, or aspire to follow as much as possible, in our design discussions & code reviews.
 -->
 
 ---
@@ -59,9 +65,10 @@ The First 5 Principles of Object Oriented Design
 
 
 <!--
-- Principles defined by Robert C. Martin (Uncle Bob) in 2000
-- Acronym introduced by Michael Feathers
+- Acronym - each letter refers to a different principle
 - Apply to any object-oriented design but also software component or microservices
+- We'll go through each principle with examples, using an imaginary Space Invaders game
+
 -->
 
 ---
@@ -76,6 +83,14 @@ media: /single_responsibility_principle.jpg
 - Easier to understand
 - Less risk to break unrelated code
 - Ask yourself: what is the responsibility of my component?
+
+<!--
+- Your class should have only one purpose
+
+- When you have a change to make, it should very clear which class is impacted
+
+- You should not be worried that you will break other unrelated code when making that change
+-->
 
 ---
 
@@ -92,8 +107,8 @@ classDiagram
 ```
 
 Several reasons to change:
-- change the logic that calculate the health
-- move different ways
+- change the logic on how an invader heals itself
+- move the invader in different ways
 - change the rendering service
 
 <!--
@@ -120,6 +135,10 @@ classDiagram
 ```
 
 Single reason for `Invader` to change: logic that handles the healing process
+
+<!--
+heal() is related to the Invader itself, what it knows about itself and can actually control
+-->
 
 ---
 layout: text-image
@@ -158,6 +177,14 @@ class InvaderAttack
   end
 end
 ```
+
+<!--
+Let's say I have a class that handles an attack, and there's a main loop. I use the InvaderMover to move and InvaderRenderer to render, because
+that's all I have in my code right now.
+
+Do you foresee which problems we might encounter?
+-->
+
 ---
 layout: text-window
 ---
@@ -226,7 +253,7 @@ classDiagram
 ```
 
 <!--
-We now have new options for movers and renderers, and these classes inherit from the parent classes Mover and Renderer, which have a move() and render() methods respectively. You can further specify their own move() and render() methods.
+First, we need new options for movers and renderers, and these classes inherit from a parent class. You can overwrite the methods where you need them to be different
 -->
 
 ---
@@ -259,8 +286,9 @@ class InvaderAttack
 end
 ```
 <!--
-Here, InvaderAttack takes a mover and renderer, but it doesn't know about their specific implementation, other than they have a move() or render() method. We'll see this example again with Dependency Inversion Principle (D)
-Note that it remains a bit risky with Ruby, because it doesn't check if the mover and renderer that you pass in the initialize method is of the right type. This is something that typed languages, like Typescript, would support in reducing chances of errors.
+InvaderAttack now takes a mover and renderer in its initialize method, but it doesn't know about their specific implementation, other than they have a move() or render() method. We'll see this example again with Dependency Inversion Principle (D)
+
+Note that it remains a bit risky with Ruby, because it doesn't check if the mover and renderer that you pass in the initialize method is of the right type. If you pass it another object which doesn't move or render, you will get an error. This is something that typed languages, like Typescript, would support you with.
 -->
 
 ---
@@ -343,7 +371,7 @@ class OpenGlException < RuntimeException; end
 
 class InvaderAttack
   def draw
-      raise GraphicsException.new
+    raise GraphicsException.new
   end
 end
 
@@ -368,7 +396,7 @@ class OpenGlException < GraphicsException; end
 
 class InvaderAttack
   def draw
-      raise GraphicsException.new
+    raise GraphicsException.new
   end
 end
 
@@ -438,7 +466,7 @@ class Invader
   end
 end
 
-class DiveBomber < Invader {
+class DiveBomber < Invader
   def check_collision(missile)
     if missile.active?
       missile.intersects(self) ? missile : nil
@@ -446,7 +474,6 @@ class DiveBomber < Invader {
       nil
     end
   end
-}
 ```
 
 ---
@@ -501,7 +528,7 @@ end
 
 class DiveBomber < Invader 
   def set_strength(strength)
-    @strength = strength;
+    @strength = strength
   end
 end
 ```
@@ -534,14 +561,18 @@ class InvaderAttack
 end
 
 class Bomber
+  ...
+
   def attack(target)
-    InvaderAttack.new.bomb(target, false)
+    invader_attack.bomb(target, false)
   end
 end
 
 class Swooper
+  ...
+
   def attack
-    InvaderAttack.new.bomb(target, true)
+    invader_attack.bomb(target, true)
   end
 end
 ```
@@ -558,7 +589,7 @@ layout: text-window
 ### Example: ISP fixed
 
 ::window::
-```ruby
+```ruby{1,6,7,8,19,23,24}
 class InvaderAttack
   def bomb(target)
     target.destroy
@@ -569,16 +600,20 @@ class InvaderAttack
   end
 end
 
+class Bomber
+  ...
+
+  def attack(target)
+    invader_attack.bomb(target)
+  end
+end
+
 class Swooper
+ ...
+
   def attack(target)
     invader_attack.bomb(target)
     invader_attack.swoop
-  end
-
-  private
-
-  def invader
-    InvaderAttack.new
   end
 end
 ```
@@ -595,6 +630,15 @@ media: /dependency_inversion_principle.jpg
 - Closely tied to Open/Closed Principle
 - DIP enables OCP
 
+<!--
+
+Any class that has a single responsibility needs things from other classes to work, but it shouldn't be dependent on their specific implementation.
+
+A high-level module should not depend on a low-level module, especially that the low-level module has more chance to change more often than the high-level.
+
+Both should depend on abstraction.
+-->
+
 ---
 layout: text-window
 ---
@@ -603,7 +647,7 @@ layout: text-window
 ### Example
 
 - We use Inversion of Control (IOC) to inject concrete implementations
-- You can either do it manually or use Dependency Injection Frameworks
+- You can either do it manually or use [Dependency Injection Frameworks](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection)
 
 ::window::
 ```ruby{11,12,13,15}
@@ -626,6 +670,8 @@ InvaderAttack.new(invaders, mover, renderer)
 
 <!--
 Coming back to the example we talked about in the Open Closed principle, we see here how we instantiate the invaders, mover and renderer outside the InvaderAttack class
+
+You don't have this in Ruby, but in other languages (Spring with Java, C# with .NET), you can do Dependency Injection, which we won't cover here
 -->
 
 ---
@@ -729,7 +775,7 @@ layout: text-window
 
 ::window::
 ```ruby
-## Cyclomatic Complexity is too high
+## Cyclomatic Complexity is too high!
 
 def customer_order
   if customer_id.present? && !order_id.present?
@@ -742,6 +788,75 @@ def customer_order
     render_error :not_found, 'Invalid info' \
       unless @info.customer_id == customer_id &&
               @info.order_id == order_id
+  end
+end
+```
+
+---
+layout: text-window
+---
+
+# Keep it simple
+
+### First refactor:
+- Extract conditions in their own simple methods
+- Use clear names for your methods
+
+
+::window::
+```ruby
+
+def customer_id_only?
+  customer_id.present? && order_id.blank?
+end
+
+def order_id_only?
+  order_id.present? && customer_id.blank?
+end
+
+def customer_id_valid?
+  @info.customer_id == customer_id
+end
+
+def order_id_valid?
+  @info.order_id == order_id
+end
+
+def full_order_info?
+  customer_id.present? && order_id.present?
+end
+
+def full_order_info_valid?
+  customer_id_valid? && order_id_valid?
+end
+```
+
+---
+layout: text-window
+---
+
+# Keep it simple
+
+### First refactor (cont'd):
+- Avoid nesting conditional statements
+
+Now that it's easier to read, you can ask yourself: 
+
+*"Am I missing anything? Does it do what I need?"*
+
+
+::window::
+```ruby
+
+def customer_order
+  if customer_id_only? && !customer_id_valid?
+    render_error :not_found, 'Invalid customer id'
+  elsif order_id_only? && !order_id_valid?
+    render_error :not_found, 'Invalid order id'
+  elsif full_order_info? && !full_order_info_valid?
+    render_error :not_found, 'Invalid info'
+  else
+    return
   end
 end
 ```
@@ -770,13 +885,20 @@ end
 
 class User < ActiveRecord::Base
   has_many :games
+
+  validates :email, presence: true
 end
 
-invader_game.user.username
+invader_game.user.email
 
 # ⚠️WARNING⚠️ 
-# INSTANCE OF GAME IS CALLING USERNAME VIA USER
+# INSTANCE OF GAME IS CALLING EMAIL VIA USER
 ```
+
+<!--
+The instance of game shouldn't know that user can call 'email'. Especially if later on, 'user' changes and 'email' as well, you would need to change it
+everywhere you called it.
+-->
 
 ---
 layout: text-window
@@ -793,18 +915,18 @@ layout: text-window
 ```ruby
 class Game < ActiveRecord::Base
   belongs_to :user
-  delegate :username, to: :user, prefix: true
+  
+  def user_email
+    user&.email
+  end
 end
 
-class User < ActiveRecord::Base
-  has_many :games
-end
-
-invader_game.user_username
-
-# 'DELEGATE' IN RAILS MAKES IT POSSIBLE
-# TO CALL USERNAME DIRECTLY ON INSTANCE OF GAME
+invader_game.user_email
 ```
+
+<!--
+You might not always be able to follow this law to the dot, but it's good to know about the risks and make an informed decision
+-->
 
 ---
 layout: new-section
@@ -820,14 +942,16 @@ media: /yagni.png
 
 # You ain't gonna need it
 
-- Implement features only when you do need it
-- Avoid having to maintain code that is not being used, and might never be
-- Also in line with the Agile Methodology
+- Implement features only **when you do need it**
+- Avoid having to **maintain code** that is not being used, and might never be
+- Also in line with the **Agile Methodology**
+
+<!--
+Do not code features just because you know how to do it (for example, don't code all CRUD actions at once if you don't need them all)
 
 Do expect your code to change in the future and make sure it will be **easy to change**, but you can't predict what **exact changes** will be needed.
 
-<!--
-By following all the previous principles, you are making sure that when you DO need it, it's easy to implement in your existing code.
+Thankfully, by following all the previous principles, you are making sure that when you DO need a feature, it's easy to implement in your existing code.
 -->
 
 ---
