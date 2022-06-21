@@ -20,11 +20,6 @@ themeConfig:
 </div>
 
 <!--
-Congrats, you have completed Le Wagon's coding bootcamp! But then... what's next?
-
-Is it just about learning more languages and framework? No!
-
-Especially if you join an existing company as a dev, you're about to work with more people, on much bigger projects, which brings different challenges.
 
 This presentation is about a philosophy we follow at Kumojin, or aspire to follow as much as possible, in our design discussions & code reviews.
 -->
@@ -171,8 +166,8 @@ class InvaderAttack
 
   def main_loop
     invaders.each do |invader|
-      InvaderMover.new.move(invader);
-      InvaderRenderer.new.render(invader);
+      InvaderMover.new.move(invader)
+      InvaderRenderer.new.render(invader)
     end
   end
 end
@@ -206,8 +201,8 @@ class InvaderAttack
 
   def main_loop
     invaders.each do |invader|
-      InvaderMover.new.move(invader);
-      InvaderRenderer.new.render(invader);
+      InvaderMover.new.move(invader)
+      InvaderRenderer.new.render(invader)
     end
   end
 end
@@ -571,7 +566,7 @@ end
 class Swooper
   ...
 
-  def attack
+  def attack(target)
     invader_attack.bomb(target, true)
   end
 end
@@ -855,8 +850,6 @@ def customer_order
     render_error :not_found, 'Invalid order id'
   elsif full_order_info? && !full_order_info_valid?
     render_error :not_found, 'Invalid info'
-  else
-    return
   end
 end
 ```
